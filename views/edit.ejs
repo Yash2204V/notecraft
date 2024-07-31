@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class = "w-full h-screen bg-zinc-900 text-white p-4">
+        <div class="flex justify-end">
+            <a class="bg-red-500 rounded-md px-3 py-2 text-sm mb-5 inline-block" href="/logout">Logout</a>
+        </div>
+        <h1 class="text-2xl mb-1 ">edit your post</h1>
+        <h4 class="mb-4 text-sky-500"><a href="/profile">Go Back</a></h4>
+        <form action="/update/<%= post._id %>" method="post">
+            <textarea class="p-3 w-1/3 resize-none bg-transparent border-2 outline-none border-zinc-800 rounded-md" name="content" placeholder="What's on your mind?"><%= post.content %></textarea>
+            <input type="submit" class="text-black w-42 px-3 py-2 bg-yellow-500 text-sm block rounded-md mt-2" value="Update Post">
+        </form>
+
+    </div>
+</body>
+</html>
