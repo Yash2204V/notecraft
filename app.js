@@ -32,7 +32,6 @@ app.post('/upload', IsLoggedIn, upload.single('image'), async (req,res)=>{
     res.redirect("/profile");
 })
 
-
 app.post('/signup',(req,res)=>{
     const { username, name, email, age, password } = req.body;
 
@@ -47,7 +46,7 @@ app.post('/signup',(req,res)=>{
             })
             const token = jwt.sign({email: user.email, userid:user._id}, "shhhh");
             res.cookie("token",token);
-            res.redirect("/login");
+            res.redirect("/profile");
         });
     });
 })
@@ -56,6 +55,11 @@ app.get('/profile', IsLoggedIn, async (req,res)=>{
     let user = await userModel.findOne({email: req.user.email}).populate("posts"); 
     // Initially, posts are set of IDs and through populating them ~ we extract the data of them through IDs.
     res.render('profile',{user: user});
+})
+
+app.get('/delete/:id', IsLoggedIn, async (req,res)=>{
+    await postModel.findOneAndDelete({_id: req.params.id});
+    res.redirect('/profile');
 })
 
 app.get('/like/:id', IsLoggedIn, async (req,res)=>{
